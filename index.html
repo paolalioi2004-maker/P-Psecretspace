@@ -7,6 +7,7 @@
     <title>P & P</title>
 
     <style>
+
         * {
             margin: 0;
             padding: 0;
@@ -16,24 +17,24 @@
         body {
             background: #080808;
             color: #f4f1eb;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh;
+            overflow-x: hidden;
             font-family: Georgia, "Times New Roman", serif;
         }
 
         .screen {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
-            padding: 30px;
+            padding: 60px 30px;
         }
 
         .content {
             width: 100%;
             max-width: 700px;
-            animation: fadeIn 2s ease;
+            animation: fadeIn 1.5s ease;
         }
 
         .title {
@@ -78,9 +79,9 @@
         }
 
         .question {
-            font-size: clamp(25px, 4vw, 42px);
+            font-size: clamp(22px, 4vw, 42px);
             font-weight: normal;
-            line-height: 1.4;
+            line-height: 1.45;
         }
 
         .question em {
@@ -131,6 +132,7 @@
         }
 
         @keyframes fadeIn {
+
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -140,11 +142,15 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
 
     <!-- INTRO -->
 
@@ -171,7 +177,8 @@
     </section>
 
 
-    <!-- PRIMO ENIGMA -->
+
+    <!-- SCENA 01 -->
 
     <section class="screen hidden" id="chapter1">
 
@@ -182,25 +189,37 @@
             </p>
 
             <h2 class="question">
-                Io ero fidanzata.<br><br>
 
-                Avevo delle treccine lunghissime.<br><br>
+                Io ero fidanzata.
+
+                <br><br>
+
+                Avevo delle treccine lunghissime.
+
+                <br><br>
 
                 E tu mi sei stato presentato come
-                <em>“un tizio che andava dietro alla mia unica amica single”.</em>
+                <em>
+                    “un tizio che andava dietro alla mia unica amica single”.
+                </em>
+
                 <br><br>
 
                 Ironico, considerando dove siamo finiti.
+
                 <br><br>
 
                 Ma torniamo all'inizio.
+
                 <br><br>
 
                 <strong>Che data era?</strong>
+
             </h2>
 
+
             <input
-                id="answer"
+                id="answer1"
                 class="input"
                 type="text"
                 placeholder="GG / MM / AAAA"
@@ -209,18 +228,77 @@
 
             <br>
 
-            <button onclick="checkAnswer()">
+            <button onclick="checkAnswer1()">
                 CONFERMA
             </button>
 
-            <div class="message" id="message"></div>
+            <div class="message" id="message1"></div>
 
         </div>
 
     </section>
 
 
+
+    <!-- SCENA 02 -->
+
+    <section class="screen hidden" id="chapter2">
+
+        <div class="content">
+
+            <p class="chapter">
+                SCENA 02 — QUASI UN ANNO DOPO
+            </p>
+
+            <h2 class="question">
+
+                Poi il tempo è passato.
+
+                <br><br>
+
+                Quasi un anno.
+
+                <br><br>
+
+                E poi, per qualche strano motivo,
+                le nostre strade si sono incrociate di nuovo.
+
+                <br><br>
+
+                Questa volta, però,
+                <em>qualcosa era diverso.</em>
+
+                <br><br>
+
+                <strong>Che giorno era?</strong>
+
+            </h2>
+
+
+            <input
+                id="answer2"
+                class="input"
+                type="text"
+                placeholder="GG / MM / AAAA"
+                autocomplete="off"
+            >
+
+            <br>
+
+            <button onclick="checkAnswer2()">
+                CONFERMA
+            </button>
+
+            <div class="message" id="message2"></div>
+
+        </div>
+
+    </section>
+
+
+
     <script>
+
 
         function startFilm() {
 
@@ -231,36 +309,32 @@
         }
 
 
-        function checkAnswer() {
+
+        function checkAnswer1() {
 
             const answer = document
-                .getElementById("answer")
+                .getElementById("answer1")
                 .value
                 .trim();
 
-            const message = document.getElementById("message");
+            const message = document.getElementById("message1");
 
-
-            /*
-             * INSERISCI QUI LA VOSTRA DATA.
-             *
-             * Esempio:
-             * const correctAnswer = "14/05/2024";
-             */
-
-            const correctAnswer = "INSERISCI_DATA";
+            const correctAnswer = "09/08/2024";
 
 
             if (answer === correctAnswer) {
 
                 message.innerHTML = "✓ CORRETTO.";
 
-                message.style.opacity = "1";
-
                 setTimeout(() => {
 
-                    message.innerHTML =
-                        "Ma questa è solo l'inizio...";
+                    document
+                        .getElementById("chapter1")
+                        .classList.add("hidden");
+
+                    document
+                        .getElementById("chapter2")
+                        .classList.remove("hidden");
 
                 }, 1200);
 
@@ -273,7 +347,36 @@
 
         }
 
+
+
+        function checkAnswer2() {
+
+            const answer = document
+                .getElementById("answer2")
+                .value
+                .trim();
+
+            const message = document.getElementById("message2");
+
+            const correctAnswer = "21/04/2025";
+
+
+            if (answer === correctAnswer) {
+
+                message.innerHTML = "✓ CORRETTO.";
+
+            } else {
+
+                message.innerHTML =
+                    "Quasi... pensa a quel giorno.";
+
+            }
+
+        }
+
+
     </script>
+
 
 </body>
 </html>
