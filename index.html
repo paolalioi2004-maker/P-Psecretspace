@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>P & P</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #080808;
+            color: #f4f1eb;
+            height: 100vh;
+            overflow: hidden;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        /* SCHERMATA INIZIALE */
+
+        .intro {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            animation: entrance 2.5s ease forwards;
+        }
+
+        .title {
+            font-size: clamp(80px, 13vw, 170px);
+            font-weight: normal;
+            letter-spacing: -5px;
+            line-height: 1;
+        }
+
+        .subtitle {
+            margin-top: 25px;
+
+            font-family: Arial, sans-serif;
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+
+            opacity: 0.6;
+        }
+
+        .play {
+            margin-top: 65px;
+
+            padding: 14px 32px;
+
+            background: transparent;
+            border: 1px solid rgba(244, 241, 235, 0.5);
+
+            color: #f4f1eb;
+
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 3px;
+
+            cursor: pointer;
+
+            transition: all 0.5s ease;
+        }
+
+        .play:hover {
+            background: #f4f1eb;
+            color: #080808;
+            transform: scale(1.04);
+        }
+
+        .credits {
+            position: absolute;
+            bottom: 25px;
+
+            font-family: Arial, sans-serif;
+            font-size: 8px;
+            letter-spacing: 3px;
+
+            opacity: 0.25;
+        }
+
+
+        /* SECONDA SCHERMATA */
+
+        .scene {
+            display: none;
+
+            height: 100vh;
+
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            animation: fadeIn 2s ease;
+        }
+
+        .scene-content {
+            max-width: 600px;
+            padding: 30px;
+        }
+
+        .chapter {
+            font-family: Arial, sans-serif;
+            font-size: 9px;
+            letter-spacing: 5px;
+            opacity: 0.4;
+            margin-bottom: 30px;
+        }
+
+        .question {
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: normal;
+            line-height: 1.2;
+        }
+
+        .instruction {
+            margin-top: 25px;
+
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            letter-spacing: 2px;
+
+            opacity: 0.45;
+        }
+
+
+        /* ANIMAZIONI */
+
+        @keyframes entrance {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- PRIMA SCENA -->
+
+    <section class="intro" id="intro">
+
+        <h1 class="title">
+            P &amp; P
+        </h1>
+
+        <p class="subtitle">
+            un film di noi
+        </p>
+
+        <button class="play" onclick="startFilm()">
+            SCHIACCIA PLAY
+        </button>
+
+        <p class="credits">
+            2025 — ∞
+        </p>
+
+    </section>
+
+
+
+    <!-- SECONDA SCENA -->
+
+    <section class="scene" id="scene">
+
+        <div class="scene-content">
+
+            <p class="chapter">
+                PRIMA DI INIZIARE
+            </p>
+
+            <h2 class="question">
+                Sei pronto?
+            </h2>
+
+            <p class="instruction">
+                Questa storia è solo nostra.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <script>
+
+        function startFilm() {
+
+            // Nasconde la prima schermata
+            document.getElementById("intro").style.display = "none";
+
+            // Mostra la seconda schermata
+            document.getElementById("scene").style.display = "flex";
+
+        }
+
+    </script>
+
+
+</body>
+</html>
