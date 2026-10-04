@@ -21,92 +21,52 @@
             font-family: Georgia, "Times New Roman", serif;
         }
 
-        /* SCHERMATA INIZIALE */
-
-        .intro {
+        .screen {
             height: 100vh;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             text-align: center;
+            padding: 30px;
+        }
 
-            animation: entrance 2.5s ease forwards;
+        .content {
+            width: 100%;
+            max-width: 700px;
+            animation: fadeIn 2s ease;
         }
 
         .title {
-            font-size: clamp(80px, 13vw, 170px);
+            font-size: clamp(75px, 13vw, 160px);
             font-weight: normal;
-            letter-spacing: -5px;
-            line-height: 1;
+            letter-spacing: -6px;
         }
 
         .subtitle {
             margin-top: 25px;
-
             font-family: Arial, sans-serif;
             font-size: 11px;
             letter-spacing: 5px;
             text-transform: uppercase;
-
             opacity: 0.6;
         }
 
-        .play {
-            margin-top: 65px;
-
+        button {
+            margin-top: 60px;
             padding: 14px 32px;
-
             background: transparent;
-            border: 1px solid rgba(244, 241, 235, 0.5);
-
+            border: 1px solid rgba(244,241,235,0.5);
             color: #f4f1eb;
-
             font-family: Arial, sans-serif;
             font-size: 10px;
             letter-spacing: 3px;
-
             cursor: pointer;
-
-            transition: all 0.5s ease;
+            transition: all 0.4s ease;
         }
 
-        .play:hover {
+        button:hover {
             background: #f4f1eb;
             color: #080808;
-            transform: scale(1.04);
-        }
-
-        .credits {
-            position: absolute;
-            bottom: 25px;
-
-            font-family: Arial, sans-serif;
-            font-size: 8px;
-            letter-spacing: 3px;
-
-            opacity: 0.25;
-        }
-
-
-        /* SECONDA SCHERMATA */
-
-        .scene {
-            display: none;
-
-            height: 100vh;
-
-            justify-content: center;
-            align-items: center;
-
-            text-align: center;
-
-            animation: fadeIn 2s ease;
-        }
-
-        .scene-content {
-            max-width: 600px;
-            padding: 30px;
         }
 
         .chapter {
@@ -114,29 +74,63 @@
             font-size: 9px;
             letter-spacing: 5px;
             opacity: 0.4;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .question {
-            font-size: clamp(28px, 5vw, 48px);
+            font-size: clamp(25px, 4vw, 42px);
             font-weight: normal;
-            line-height: 1.2;
+            line-height: 1.4;
         }
 
-        .instruction {
-            margin-top: 25px;
+        .question em {
+            font-style: italic;
+        }
 
+        .question strong {
+            font-weight: normal;
+        }
+
+        .input {
+            margin-top: 45px;
+            width: 240px;
+            padding: 13px;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid rgba(244,241,235,0.5);
+            color: #f4f1eb;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .input::placeholder {
+            color: rgba(244,241,235,0.35);
+        }
+
+        .message {
+            margin-top: 25px;
+            min-height: 20px;
             font-family: Arial, sans-serif;
             font-size: 10px;
             letter-spacing: 2px;
-
-            opacity: 0.45;
         }
 
+        .hidden {
+            display: none;
+        }
 
-        /* ANIMAZIONI */
+        .credits {
+            position: absolute;
+            bottom: 25px;
+            font-family: Arial, sans-serif;
+            font-size: 8px;
+            letter-spacing: 3px;
+            opacity: 0.25;
+        }
 
-        @keyframes entrance {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
                 transform: translateY(20px);
@@ -147,38 +141,28 @@
                 transform: translateY(0);
             }
         }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
     </style>
 </head>
 
-
 <body>
 
+    <!-- INTRO -->
 
-    <!-- PRIMA SCENA -->
+    <section class="screen" id="intro">
 
-    <section class="intro" id="intro">
+        <div class="content">
 
-        <h1 class="title">
-            P &amp; P
-        </h1>
+            <h1 class="title">P &amp; P</h1>
 
-        <p class="subtitle">
-            un film di noi
-        </p>
+            <p class="subtitle">
+                un film di noi
+            </p>
 
-        <button class="play" onclick="startFilm()">
-            SCHIACCIA PLAY
-        </button>
+            <button onclick="startFilm()">
+                SCHIACCIA PLAY
+            </button>
+
+        </div>
 
         <p class="credits">
             2025 — ∞
@@ -187,45 +171,109 @@
     </section>
 
 
+    <!-- PRIMO ENIGMA -->
 
-    <!-- SECONDA SCENA -->
+    <section class="screen hidden" id="chapter1">
 
-    <section class="scene" id="scene">
-
-        <div class="scene-content">
+        <div class="content">
 
             <p class="chapter">
-                PRIMA DI INIZIARE
+                SCENA 01 — IL PRIMO INCONTRO
             </p>
 
             <h2 class="question">
-                Sei pronto?
+                Io ero fidanzata.<br><br>
+
+                Avevo delle treccine lunghissime.<br><br>
+
+                E tu mi sei stato presentato come
+                <em>“un tizio che andava dietro alla mia unica amica single”.</em>
+                <br><br>
+
+                Ironico, considerando dove siamo finiti.
+                <br><br>
+
+                Ma torniamo all'inizio.
+                <br><br>
+
+                <strong>Che data era?</strong>
             </h2>
 
-            <p class="instruction">
-                Questa storia è solo nostra.
-            </p>
+            <input
+                id="answer"
+                class="input"
+                type="text"
+                placeholder="GG / MM / AAAA"
+                autocomplete="off"
+            >
+
+            <br>
+
+            <button onclick="checkAnswer()">
+                CONFERMA
+            </button>
+
+            <div class="message" id="message"></div>
 
         </div>
 
     </section>
 
 
-
     <script>
 
         function startFilm() {
 
-            // Nasconde la prima schermata
-            document.getElementById("intro").style.display = "none";
+            document.getElementById("intro").classList.add("hidden");
 
-            // Mostra la seconda schermata
-            document.getElementById("scene").style.display = "flex";
+            document.getElementById("chapter1").classList.remove("hidden");
+
+        }
+
+
+        function checkAnswer() {
+
+            const answer = document
+                .getElementById("answer")
+                .value
+                .trim();
+
+            const message = document.getElementById("message");
+
+
+            /*
+             * INSERISCI QUI LA VOSTRA DATA.
+             *
+             * Esempio:
+             * const correctAnswer = "14/05/2024";
+             */
+
+            const correctAnswer = "INSERISCI_DATA";
+
+
+            if (answer === correctAnswer) {
+
+                message.innerHTML = "✓ CORRETTO.";
+
+                message.style.opacity = "1";
+
+                setTimeout(() => {
+
+                    message.innerHTML =
+                        "Ma questa è solo l'inizio...";
+
+                }, 1200);
+
+            } else {
+
+                message.innerHTML =
+                    "Non proprio. Torna indietro nel tempo.";
+
+            }
 
         }
 
     </script>
-
 
 </body>
 </html>
