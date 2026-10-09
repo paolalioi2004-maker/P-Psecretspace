@@ -1,382 +1,698 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P & P — un film di noi</title>
 
-    <title>P & P</title>
+<style>
+:root {
+    --bg: #080808;
+    --text: #f4f1eb;
+    --muted: #a8a39a;
+    --line: #494641;
+    --accent: #b9a17a;
+}
 
-    <style>
+* {
+    box-sizing: border-box;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        body {
-            background: #080808;
-            color: #f4f1eb;
-            min-height: 100vh;
-            overflow-x: hidden;
-            font-family: Georgia, "Times New Roman", serif;
-        }
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+}
 
-        .screen {
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 60px 30px;
-        }
+.screen {
+    min-height: 100svh;
+    padding: 70px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
 
-        .content {
-            width: 100%;
-            max-width: 700px;
-            animation: fadeIn 1.5s ease;
-        }
+.content {
+    width: 100%;
+    max-width: 720px;
+    margin: auto;
+    animation: appear 1s ease;
+}
 
-        .title {
-            font-size: clamp(75px, 13vw, 160px);
-            font-weight: normal;
-            letter-spacing: -6px;
-        }
+.hidden {
+    display: none !important;
+}
 
-        .subtitle {
-            margin-top: 25px;
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            opacity: 0.6;
-        }
+.title {
+    font-size: clamp(76px, 15vw, 155px);
+    font-weight: normal;
+    letter-spacing: -5px;
+    margin: 0;
+}
 
-        button {
-            margin-top: 60px;
-            padding: 14px 32px;
-            background: transparent;
-            border: 1px solid rgba(244,241,235,0.5);
-            color: #f4f1eb;
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all 0.4s ease;
-        }
+.subtitle,
+.chapter,
+button,
+.message,
+.eyebrow {
+    font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
 
-        button:hover {
-            background: #f4f1eb;
-            color: #080808;
-        }
+.subtitle {
+    margin-top: 24px;
+    font-size: 10px;
+    opacity: .65;
+}
 
-        .chapter {
-            font-family: Arial, sans-serif;
-            font-size: 9px;
-            letter-spacing: 5px;
-            opacity: 0.4;
-            margin-bottom: 35px;
-        }
+.chapter {
+    color: var(--muted);
+    font-size: 10px;
+    line-height: 1.8;
+    margin-bottom: 32px;
+}
 
-        .question {
-            font-size: clamp(22px, 4vw, 42px);
-            font-weight: normal;
-            line-height: 1.45;
-        }
+.question {
+    font-size: clamp(23px, 4vw, 39px);
+    font-weight: normal;
+    line-height: 1.5;
+    margin: 0 auto;
+}
 
-        .question em {
-            font-style: italic;
-        }
+.question em {
+    font-style: italic;
+}
 
-        .question strong {
-            font-weight: normal;
-        }
+.caption {
+    max-width: 560px;
+    margin: 28px auto;
+    font-size: clamp(17px, 2.5vw, 22px);
+    line-height: 1.8;
+}
 
-        .input {
-            margin-top: 45px;
-            width: 240px;
-            padding: 13px;
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(244,241,235,0.5);
-            color: #f4f1eb;
-            text-align: center;
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            outline: none;
-        }
+.small {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    line-height: 1.8;
+}
 
-        .input::placeholder {
-            color: rgba(244,241,235,0.35);
-        }
+button {
+    margin: 28px 5px 0;
+    padding: 15px 22px;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid #77736b;
+    font-size: 10px;
+    cursor: pointer;
+    transition: .3s;
+}
 
-        .message {
-            margin-top: 25px;
-            min-height: 20px;
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 2px;
-        }
+button:hover {
+    background: var(--text);
+    color: var(--bg);
+}
 
-        .hidden {
-            display: none;
-        }
+input {
+    display: block;
+    width: min(270px, 90%);
+    margin: 32px auto 0;
+    padding: 14px 8px;
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid #77736b;
+    border-radius: 0;
+    color: var(--text);
+    font-size: 16px;
+    text-align: center;
+    outline: none;
+}
 
-        .credits {
-            position: absolute;
-            bottom: 25px;
-            font-family: Arial, sans-serif;
-            font-size: 8px;
-            letter-spacing: 3px;
-            opacity: 0.25;
-        }
+input:focus {
+    border-bottom-color: var(--accent);
+}
 
-        @keyframes fadeIn {
+input::placeholder {
+    color: #77736b;
+}
 
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+.message {
+    min-height: 20px;
+    margin-top: 22px;
+    font-size: 10px;
+    line-height: 1.8;
+    color: var(--accent);
+}
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+.photo {
+    display: block;
+    width: 100%;
+    max-height: 460px;
+    object-fit: contain;
+    margin: 32px auto 20px;
+}
 
-        }
+.photo-caption {
+    font-size: 17px;
+    line-height: 1.7;
+    font-style: italic;
+    color: #d3cec4;
+}
 
-    </style>
+.reveal {
+    margin-top: 28px;
+}
+
+.music-title {
+    font-size: clamp(36px, 8vw, 65px);
+    font-weight: normal;
+    line-height: 1.2;
+}
+
+.music-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 14px 20px;
+    border: 1px solid var(--line);
+    color: var(--text);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.music-link:hover {
+    background: var(--text);
+    color: var(--bg);
+}
+
+.divider {
+    width: 45px;
+    height: 1px;
+    background: var(--line);
+    margin: 32px auto;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 35px;
+    text-align: left;
+}
+
+.memory {
+    min-width: 0;
+}
+
+.memory img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    background: #151515;
+}
+
+.memory p {
+    margin: 10px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.eyebrow {
+    margin-top: 55px;
+    color: var(--muted);
+    font-size: 9px;
+}
+
+.footer {
+    padding: 30px 20px;
+    color: #77736b;
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-align: center;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 480px) {
+    .screen {
+        padding: 50px 22px;
+    }
+
+    .question {
+        line-height: 1.45;
+    }
+
+    .gallery {
+        gap: 12px;
+    }
+
+    button {
+        max-width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
+<!-- INTRO -->
 
-    <!-- INTRO -->
+<section class="screen" id="intro">
+    <div class="content">
+        <h1 class="title">P &amp; P</h1>
+        <p class="subtitle">un film di noi</p>
+        <button onclick="show('s1')">SCHIACCIA PLAY</button>
+        <p class="small" style="margin-top:55px">UN ARCHIVIO DI NOI · 2024—∞</p>
+    </div>
+</section>
 
-    <section class="screen" id="intro">
 
-        <div class="content">
+<!-- SCENA 01 -->
 
-            <h1 class="title">P &amp; P</h1>
+<section class="screen hidden" id="s1">
+    <div class="content">
+        <p class="chapter">Scena 01 — Il primo incontro</p>
 
-            <p class="subtitle">
-                un film di noi
-            </p>
+        <h2 class="question">
+            Io ero fidanzata.<br><br>
+            Avevo delle treccine lunghissime.<br><br>
+            E tu mi sei stato presentato come
+            <em>“un tizio che andava dietro alla mia unica amica single”.</em><br><br>
+            Ironico, considerando dove siamo finiti.<br><br>
+            Ma torniamo all'inizio.<br><br>
+            Che data era?
+        </h2>
 
-            <button onclick="startFilm()">
-                SCHIACCIA PLAY
-            </button>
+        <input id="a1" placeholder="GG / MM / AAAA"
+               autocomplete="off">
 
+        <button onclick="check('a1','09/08/2024','m1','p1','s2')">
+            CONFERMA
+        </button>
+
+        <p class="message" id="m1"></p>
+
+        <div class="reveal hidden" id="r1">
+            <img class="photo" id="p1" src="foto/primo_incontro.jpg"
+                 alt="Il primo incontro"
+                 onerror="this.style.display='none'">
+            <p class="photo-caption">E chi l'avrebbe immaginato?</p>
+            <button onclick="show('s2')">PROSSIMA SCENA</button>
         </div>
+    </div>
+</section>
 
-        <p class="credits">
-            2025 — ∞
+
+<!-- SCENA 02 -->
+
+<section class="screen hidden" id="s2">
+    <div class="content">
+        <p class="chapter">Scena 02 — Quasi un anno dopo</p>
+
+        <h2 class="question">
+            Poi il tempo è passato.<br><br>
+            Quasi un anno.<br><br>
+            E le nostre strade si sono incrociate di nuovo.<br><br>
+            Questa volta, però, qualcosa era diverso.<br><br>
+            Che giorno era?
+        </h2>
+
+        <input id="a2" placeholder="GG / MM / AAAA"
+               autocomplete="off">
+
+        <button onclick="check('a2','21/04/2025','m2','p2','s3')">
+            CONFERMA
+        </button>
+
+        <p class="message" id="m2"></p>
+
+        <div class="reveal hidden" id="r2">
+            <img class="photo" id="p2" src="foto/secondo_incontro.jpg"
+                 alt="Il nostro secondo incontro"
+                 onerror="this.style.display='none'">
+            <p class="photo-caption">A volte le storie ricominciano quando meno te lo aspetti.</p>
+            <button onclick="show('s3')">PROSSIMA SCENA</button>
+        </div>
+    </div>
+</section>
+
+
+<!-- SCENA 03 -->
+
+<section class="screen hidden" id="s3">
+    <div class="content">
+        <p class="chapter">Scena 03 — Il Castello</p>
+
+        <h2 class="question">
+            Ma poi ti ricordi quando abbiamo deciso
+            che io dovevo stare sola?<br><br>
+            Dov'eravamo?
+        </h2>
+
+        <input id="a3" placeholder="Scrivi il luogo" autocomplete="off">
+
+        <button onclick="check('a3','castello','m3','p3','s4')">
+            CONFERMA
+        </button>
+
+        <p class="message" id="m3"></p>
+
+        <div class="reveal hidden" id="r3">
+            <img class="photo" id="p3" src="foto/castello.jpg"
+                 alt="Il Castello"
+                 onerror="this.style.display='none'">
+            <p class="photo-caption">Quel posto. Quella conversazione. Quella sera.</p>
+            <button onclick="show('s4')">PROSSIMA SCENA</button>
+        </div>
+    </div>
+</section>
+
+
+<!-- SCENA 04 -->
+
+<section class="screen hidden" id="s4">
+    <div class="content">
+        <p class="chapter">Scena 04 — Fuori copione</p>
+
+        <h2 class="question">
+            Quella sera, mentre parlavamo,
+            è successa una cosa.<br><br>
+            Chi è finito a terra vicino alla macchina?
+        </h2>
+
+        <input id="a4" placeholder="Scrivi il nome" autocomplete="off">
+
+        <button onclick="check('a4','Pietro','m4','p4','s5')">
+            CONFERMA
+        </button>
+
+        <p class="message" id="m4"></p>
+
+        <div class="reveal hidden" id="r4">
+            <img class="photo" id="p4" src="foto/pietro_macchina.jpg"
+                 alt="Il ricordo della caduta"
+                 onerror="this.style.display='none'">
+            <p class="photo-caption">
+                Pietro. A terra. Vicino alla macchina.<br>
+                E noi a ridere.<br><br>
+                La sceneggiatura evidentemente non era stata approvata.
+            </p>
+            <button onclick="show('s5')">PROSSIMA SCENA</button>
+        </div>
+    </div>
+</section>
+
+
+<!-- INTERMEZZO -->
+
+<section class="screen hidden" id="s5">
+    <div class="content">
+        <p class="chapter">Intermezzo — Settembre / Ottobre 2025</p>
+
+        <h2 class="question">
+            E poi, da settembre a ottobre 2025,
+            tutto taceva.
+        </h2>
+
+        <div class="divider"></div>
+
+        <p class="caption">O non proprio.</p>
+
+        <p class="caption">
+            Non ci scrivevamo.<br>
+            Ma ci mettevamo like ai repost di TikTok.
         </p>
 
-    </section>
+        <img class="photo" src="foto/tiktok.jpg"
+             alt="L'archivio dei repost"
+             onerror="this.style.display='none'">
+
+        <button onclick="show('s6')">MOSTRA L'INDIZIO</button>
+    </div>
+</section>
 
 
+<!-- STAR WARS -->
 
-    <!-- SCENA 01 -->
+<section class="screen hidden" id="s6">
+    <div class="content">
+        <p class="chapter">File segreto — Star Wars</p>
 
-    <section class="screen hidden" id="chapter1">
+        <h2 class="question">
+            Io repostavo cose di Star Wars...
+        </h2>
 
-        <div class="content">
+        <img class="photo" src="foto/star_wars.jpg"
+             alt="Star Wars"
+             onerror="this.style.display='none'">
 
-            <p class="chapter">
-                SCENA 01 — IL PRIMO INCONTRO
-            </p>
+        <p class="caption">
+            Il dettaglio fondamentale?<br><br>
+            <em>Non avevo mai visto Star Wars.</em>
+        </p>
 
-            <h2 class="question">
+        <p class="small">
+            A volte l'algoritmo sa cose che noi ancora non sappiamo.
+        </p>
 
-                Io ero fidanzata.
-
-                <br><br>
-
-                Avevo delle treccine lunghissime.
-
-                <br><br>
-
-                E tu mi sei stato presentato come
-                <em>
-                    “un tizio che andava dietro alla mia unica amica single”.
-                </em>
-
-                <br><br>
-
-                Ironico, considerando dove siamo finiti.
-
-                <br><br>
-
-                Ma torniamo all'inizio.
-
-                <br><br>
-
-                <strong>Che data era?</strong>
-
-            </h2>
+        <button onclick="show('s7')">CONTINUA IL FILM</button>
+    </div>
+</section>
 
 
-            <input
-                id="answer1"
-                class="input"
-                type="text"
-                placeholder="GG / MM / AAAA"
-                autocomplete="off"
-            >
+<!-- SOUNDTRACK -->
 
-            <br>
+<section class="screen hidden" id="s7">
+    <div class="content">
+        <p class="chapter">Soundtrack — Track 01</p>
 
-            <button onclick="checkAnswer1()">
-                CONFERMA
-            </button>
+        <h1 class="music-title">Completamente</h1>
+        <p class="caption">Thegiornalisti</p>
 
-            <div class="message" id="message1"></div>
+        <div class="divider"></div>
+
+        <p class="caption">
+            Ci sono canzoni che, appena partono,
+            ti riportano in un momento preciso.
+        </p>
+
+        <a class="music-link"
+           href="https://www.youtube.com/results?search_query=Thegiornalisti+Completamente"
+           target="_blank" rel="noopener noreferrer">
+            ASCOLTA LA CANZONE ↗
+        </a>
+
+        <p class="small" style="margin-top:25px">
+            Puoi ascoltarla e tornare qui per continuare.
+        </p>
+
+        <button onclick="show('s8')">CONTINUA</button>
+    </div>
+</section>
+
+
+<!-- ARCHIVIO FOTOGRAFICO -->
+
+<section class="screen hidden" id="s8">
+    <div class="content">
+        <p class="chapter">Archivio — I prossimi capitoli</p>
+
+        <h2 class="question">La storia continua.</h2>
+
+        <p class="caption">
+            Ci sono ancora posti, viaggi, giornate
+            e momenti che meritano una scena tutta loro.
+        </p>
+
+        <div class="gallery">
+
+            <div class="memory">
+                <img src="foto/primi_fiori.jpg" alt="I primi fiori"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>I primi fiori</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/roma_01.jpg" alt="Prima volta a Roma"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Roma — 01</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/roma_02.jpg" alt="Seconda volta a Roma"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Roma — 02</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/roma_03.jpg" alt="Terza volta a Roma"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Roma — 03</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/natale.jpg" alt="Natale"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Natale</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/parigi.jpg" alt="Parigi"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Parigi</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/montesilvano.jpg" alt="Montesilvano"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Montesilvano / Contea Gentile</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/monticchio.jpg" alt="Monticchio"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Monticchio</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/matera.jpg" alt="Matera"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Matera</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/lago_turano.jpg" alt="Lago del Turano"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Lago del Turano</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/cinque_terre.jpg" alt="Cinque Terre"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Cinque Terre</p>
+            </div>
+
+            <div class="memory">
+                <img src="foto/laurea.jpg" alt="Laurea"
+                     onerror="this.closest('.memory').style.display='none'">
+                <p>Laurea</p>
+            </div>
 
         </div>
 
-    </section>
+        <div class="divider"></div>
+
+        <img class="photo" src="foto/finale.jpg"
+             alt="Noi"
+             onerror="this.style.display='none'">
+
+        <p class="caption">
+            FINE DI QUESTO CAPITOLO.<br>
+            NON DELLA STORIA.
+        </p>
+
+        <p class="small">
+            P &amp; P — un film di noi
+        </p>
+    </div>
+</section>
+
+<footer class="footer">
+    P &amp; P · UN FILM DI NOI
+</footer>
 
 
+<script>
+function show(id) {
+    document.querySelectorAll('.screen').forEach(section => {
+        section.classList.add('hidden');
+    });
 
-    <!-- SCENA 02 -->
+    const next = document.getElementById(id);
+    next.classList.remove('hidden');
 
-    <section class="screen hidden" id="chapter2">
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
-        <div class="content">
+function normalize(value) {
+    return value
+        .trim()
+        .toLocaleLowerCase('it')
+        .replace(/\s+/g, '')
+        .replace(/-/g, '/');
+}
 
-            <p class="chapter">
-                SCENA 02 — QUASI UN ANNO DOPO
-            </p>
+function check(inputId, correct, messageId, photoId, nextId) {
+    const input = document.getElementById(inputId);
+    const message = document.getElementById(messageId);
+    const answer = normalize(input.value);
+    const expected = normalize(correct);
 
-            <h2 class="question">
+    if (answer === expected) {
+        message.textContent = '✓ CORRETTO. RICORDI?';
 
-                Poi il tempo è passato.
+        const number = inputId.replace('a', '');
+        const reveal = document.getElementById('r' + number);
 
-                <br><br>
+        reveal.classList.remove('hidden');
+        input.disabled = true;
 
-                Quasi un anno.
+        const button = document.querySelector(
+            '#s' + number + ' > .content > button'
+        );
 
-                <br><br>
+        if (button) button.disabled = true;
 
-                E poi, per qualche strano motivo,
-                le nostre strade si sono incrociate di nuovo.
+        message.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+        });
+    } else {
+        message.textContent = 'Non proprio... ripensa a quel momento.';
+        input.focus();
+    }
+}
 
-                <br><br>
-
-                Questa volta, però,
-                <em>qualcosa era diverso.</em>
-
-                <br><br>
-
-                <strong>Che giorno era?</strong>
-
-            </h2>
-
-
-            <input
-                id="answer2"
-                class="input"
-                type="text"
-                placeholder="GG / MM / AAAA"
-                autocomplete="off"
-            >
-
-            <br>
-
-            <button onclick="checkAnswer2()">
-                CONFERMA
-            </button>
-
-            <div class="message" id="message2"></div>
-
-        </div>
-
-    </section>
-
-
-
-    <script>
-
-
-        function startFilm() {
-
-            document.getElementById("intro").classList.add("hidden");
-
-            document.getElementById("chapter1").classList.remove("hidden");
-
+/* Invio da tastiera per confermare la risposta */
+document.querySelectorAll('input').forEach(input => {
+    input.addEventListener('keydown', event => {
+        if (event.key === 'Enter') {
+            const button = input.parentElement.querySelector(
+                'button[onclick^="check"]'
+            );
+            if (button) button.click();
         }
-
-
-
-        function checkAnswer1() {
-
-            const answer = document
-                .getElementById("answer1")
-                .value
-                .trim();
-
-            const message = document.getElementById("message1");
-
-            const correctAnswer = "09/08/2024";
-
-
-            if (answer === correctAnswer) {
-
-                message.innerHTML = "✓ CORRETTO.";
-
-                setTimeout(() => {
-
-                    document
-                        .getElementById("chapter1")
-                        .classList.add("hidden");
-
-                    document
-                        .getElementById("chapter2")
-                        .classList.remove("hidden");
-
-                }, 1200);
-
-            } else {
-
-                message.innerHTML =
-                    "Non proprio. Torna indietro nel tempo.";
-
-            }
-
-        }
-
-
-
-        function checkAnswer2() {
-
-            const answer = document
-                .getElementById("answer2")
-                .value
-                .trim();
-
-            const message = document.getElementById("message2");
-
-            const correctAnswer = "21/04/2025";
-
-
-            if (answer === correctAnswer) {
-
-                message.innerHTML = "✓ CORRETTO.";
-
-            } else {
-
-                message.innerHTML =
-                    "Quasi... pensa a quel giorno.";
-
-            }
-
-        }
-
-
-    </script>
-
+    });
+});
+</script>
 
 </body>
 </html>
